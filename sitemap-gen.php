@@ -177,15 +177,21 @@ if (!$pf) {
 
 $start_url = filter_var($start_url, FILTER_SANITIZE_URL);
 
+$lastmod = new DateTime();
+$show_lastmod = $lastmod->format(DateTimeInterface::ATOM);
+
+
+
 fwrite($pf, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" .
-    "<?xml-stylesheet type=\"text/xsl\" href=\"http://iprodev.github.io/PHP-XML-Sitemap-Generator/xml-sitemap.xsl\"?>\n" .
-    "<!-- Created with Anonymous PHP XML Sitemap Generator " . VERSION . " http://iprodev.com -->\n" .
+
+    "<!-- Created with CR94168 PHP XML Sitemap Generator " . VERSION . " CR94168 -->\n" .
     "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"\n" .
     "        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" .
     "        xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9\n" .
     "        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">\n" .
     "  <url>\n" .
     "    <loc>" . htmlentities($start_url) . "</loc>\n" .
+    "    <lastmod>" . $show_lastmod . "</lastmod>\n" .
     "    <changefreq>$freq</changefreq>\n" .
     "    <priority>$priority</priority>\n" .
     "  </url>\n");
